@@ -202,5 +202,73 @@ CMD ["-g", "daemon off;"]
   <img width="1508" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/c0ceee5e-c353-4bee-973f-c7e9f5f5bbc3">
 - Sample code of compose : [GH: example-voting-app/docker-compose.yml at main · dockersamples/example-voting-app](https://github.com/dockersamples/example-voting-app/blob/main/docker-compose.yml)
 
+- Sample code :
+- vi Dockercompose  
+```
+version: '3.9'
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: voting_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  web:
+    build: ./web-app
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - app_code:/app
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  app_code:
+
+```
+- mkdir web-app;cd web-app
+- vi app.py
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Welcome to the Voting App!"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
+
+```
+- vi requirments.txt
+```
+flask==2.0.1
+requests==2.26.0
+numpy==1.21.1
+
+```  
+- vi Dockerfile
+```
+FROM python:3.9
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "app.py"]
+
+```
+- `docker-compose -f Dockercompose up` 
 
 

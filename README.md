@@ -151,6 +151,23 @@ CMD ["-g", "daemon off;"]
 - `docker network ls` - to list the network
 - communicates with docker name - Container to Container communication
 
+
+
+
+
+```
+
+
+
+
+
+
+
+```
+
+
+
+
 ## Volumes
 - <img width="1661" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/2ce6da79-ff2c-4562-b003-8487355830fe">
 - **VOLUME MOUNTING**
@@ -163,6 +180,27 @@ CMD ["-g", "daemon off;"]
 - **NEW WAY TO MOUNT**
 - `docker run --mount type=bind,source=/data/mysql1,target=/var/lib/mysql mysql1`
   
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+## Docker Compose:
+- Docker compose links two pods using command line and docker compose file compare view :
+  <img width="1508" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/c0ceee5e-c353-4bee-973f-c7e9f5f5bbc3">
+- Sample code of compose : [GH: example-voting-app/docker-compose.yml at main · dockersamples/example-voting-app](https://github.com/dockersamples/example-voting-app/blob/main/docker-compose.yml)
 
 
 

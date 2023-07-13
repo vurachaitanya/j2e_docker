@@ -28,8 +28,11 @@
 
 ## Docker file :
 - nginx base:
-  - File copy to working dir
-  - create if not present
+  - COPY & WORKDIR Create if not present
+  - WORKDIR - Default dir or working dir
+  - ENTRYPOINT starts the daemon.
+  - CMD : NGINX to run in the foreground and not as a background daemon
+  - CMD EXAMPLE : CMD ["/bin/sh", "-c", "ps -ef | grep java"]
     
 ```
 # Use the official NGINX base image
@@ -56,3 +59,12 @@ ENTRYPOINT ["nginx"]
 # Provide default arguments to the entry point
 CMD ["-g", "daemon off;"]
 ```
+
+- FROM: specifies the base image to use, in this case, the official NGINX image.
+- ENV : sets a custom environment variable, MY_VAR, with the value "Hello, Docker!".
+- WORKDIR sets the working directory inside the container to /usr/share/nginx/html.
+- COPY copies the index.html file from the host to the container's working directory.
+- RUN executes a command during the build process. In this case, it echoes a message.
+- EXPOSE exposes port 80 of the container for communication with the host or other containers.
+- ENTRYPOINT specifies the entry point command for the container. In this case, it is set to nginx.
+- CMD provides default arguments to the entry point command.

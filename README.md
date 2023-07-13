@@ -147,14 +147,22 @@ CMD ["-g", "daemon off;"]
 - host --network=host - users host port
 - command `docker run ubuntu --network=host`
 ### Create new network :
-- `docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network` - Bridge network
+- `docker network create --driver bridge --subnet 183.18.0.0/16 custom-isolated-network` - Bridge network
 - `docker network ls` - to list the network
 - communicates with docker name - Container to Container communication
 
 ## Volumes
-
 - <img width="1661" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/2ce6da79-ff2c-4562-b003-8487355830fe">
-
+- **VOLUME MOUNTING**
+- `docker volume create data_vol` - to create a volume 
+- Volume Created under  /var/lib/docker/volumes/data_vol
+- `docker run -v data_vol:/var/lib/mysql mysql` - attache a volume to container
+- `docker run -v data_vol1:/var/lib/mysql mysql` - if data_vol1 is not present it will create.
+- **Bind mounting**
+- `docker run -v /home/mysql:/var/lib/mysql mysql` - if already exist and attach as dir/file system
+- **NEW WAY TO MOUNT**
+- `docker run --mount type=bind,source=/data/mysql1,target=/var/lib/mysql mysql1`
+  
 
 
 

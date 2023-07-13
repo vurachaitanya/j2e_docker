@@ -1,0 +1,4 @@
+FROM nginx
+# Nginx image pulling from docker hub
+EXPOSE 80
+# Exposing the 80 port 

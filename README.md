@@ -30,8 +30,9 @@
 - nginx base:
   - File copy to working dir
   - create if not present
-  ```
-  # Use the official NGINX base image
+    
+```
+# Use the official NGINX base image
 FROM nginx
 
 # Set a custom environment variable
@@ -54,4 +55,4 @@ ENTRYPOINT ["nginx"]
 
 # Provide default arguments to the entry point
 CMD ["-g", "daemon off;"]
-  ```
+```

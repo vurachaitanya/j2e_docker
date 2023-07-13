@@ -25,3 +25,33 @@
 - `cat /etc/services` - List of system used ports
 -  `docker logs <Container id>` - get the logs of container, Check the logs for mac ip info.
 -  `docker run --name nginx_alpine -d -p 8089:80 nginx:1.25.1-alpine`
+
+## Docker file :
+- nginx base:
+  - File copy to working dir
+  - create if not present
+  ```
+  # Use the official NGINX base image
+FROM nginx
+
+# Set a custom environment variable
+ENV MY_VAR="Hello, Docker!"
+
+# Set the working directory inside the container
+WORKDIR /usr/share/nginx/html
+
+# Copy files from the host to the container
+COPY index.html .
+
+# Run a command during build time
+RUN echo "Building the Docker image..."
+
+# Expose a port for communication
+EXPOSE 80
+
+# Define the entry point for the container
+ENTRYPOINT ["nginx"]
+
+# Provide default arguments to the entry point
+CMD ["-g", "daemon off;"]
+  ```

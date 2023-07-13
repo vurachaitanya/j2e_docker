@@ -39,8 +39,23 @@ docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 - `docker run ubunut/ubunut:latest` - docker was killed immediately
 - `docker run ubunut/ubunut:latest  sleep 5` - sleep for 5 sec
 - `docker run -d  ubunut/ubunut:latest  sleep 50;docker ps` - you can check it is running backgroun as process is still running. else terminates.
-- 
+```
 
+
+```
+### Entrypoint :
+- Arguments supplied when running the container are appended as arguments to the ENTRYPOINT command.
+- When both ENTRYPOINT and CMD instructions are present in a Dockerfile, the CMD instruction's arguments are passed as additional arguments to the ENTRYPOINT command.
+- EXAMPLE: `docker run my-image John` it will produce the output "Hello John" instead.
+
+```
+ENTRYPOINT ["echo", "Hello"]
+CMD ["World"]
+```
+```
+
+
+```
 ## Docker file :
 - Ubuntu : docker build -t sleep5 .
 ```
@@ -61,7 +76,10 @@ ENTRYPOINT ["sleep"]
   ```
 
 
+```
 
+
+```
 
 
 - nginx base:
@@ -107,9 +125,7 @@ CMD ["-g", "daemon off;"]
 - ENTRYPOINT specifies the entry point command for the container. In this case, it is set to nginx.
 - CMD provides default arguments to the entry point command.
 
-- docker run -d \
-	--name some-postgres \
-	-e POSTGRES_PASSWORD=mysecretpassword \
-	-e PGDATA=/var/lib/postgresql/data/pgdata \
-	-v /Users/cvenkata/Docker/db:/var/lib/postgresql/data \
-	postgres
+
+
+
+

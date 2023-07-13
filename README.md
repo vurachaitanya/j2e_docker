@@ -127,6 +127,33 @@ CMD ["-g", "daemon off;"]
 - ENTRYPOINT specifies the entry point command for the container. In this case, it is set to nginx.
 - CMD provides default arguments to the entry point command.
 
+```
+
+
+
+
+
+
+
+
+
+
+
+```
+
+## Networking
+- bridge - default - connect with all containers 172.17.0.4
+- none --network=none
+- host --network=host - users host port
+- command `docker run ubuntu --network=host`
+### Create new network :
+- `docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network` - Bridge network
+- `docker network ls` - to list the network
+- communicates with docker name - Container to Container communication
+
+## Volumes
+
+- <img width="1661" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/2ce6da79-ff2c-4562-b003-8487355830fe">
 
 
 

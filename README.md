@@ -47,6 +47,8 @@ docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 - Arguments supplied when running the container are appended as arguments to the ENTRYPOINT command.
 - When both ENTRYPOINT and CMD instructions are present in a Dockerfile, the CMD instruction's arguments are passed as additional arguments to the ENTRYPOINT command.
 - EXAMPLE: `docker run my-image John` it will produce the output "Hello John" instead.
+- EXAMPLE: `docker run my-image` it will give "Hello World" - default if not given any
+- Can override Dockerfile ENTRYPOINT `docker run --entrypoint sleep2 ubuntu-sleeper 10`
 
 ```
 ENTRYPOINT ["echo", "Hello"]

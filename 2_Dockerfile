@@ -1,0 +1,9 @@
+FROM nginx
+
+# Set the working directory inside the container
+WORKDIR /usr/share/nginx/html
+
+# Copy files from the host to the container
+COPY index.html .
+
+EXPOSE 80

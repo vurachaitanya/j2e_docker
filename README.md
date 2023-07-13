@@ -14,6 +14,7 @@ docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 
 ## Links 
 - Remote docker : https://docs.docker.com/config/daemon/remote-access/
+- docker -H 192.168.0.121:2375 run nginx
 
 ## commands :
 - `docker pull nginx:1.25` - Docker pull a specific version.
@@ -269,6 +270,19 @@ COPY . .
 CMD ["python", "app.py"]
 
 ```
-- `docker-compose -f Dockercompose up` 
+- `docker-compose -f Dockercompose up`
+- 
+
+## CGroups & Namespaces
+- Namespaces :
+  - Parent process id 1 on master node
+  - chaild process id 1 of container is mapped to 5 or 6 id of master node
+
+- CGroups:
+  - Limtis the CPU / Memory / networking resources
+  - `docker run --cpus=0.5 ubuntu`
+  - `docker run --memory=100m ubuntu`
+
+  
 
 

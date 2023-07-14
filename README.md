@@ -40,6 +40,7 @@
 - `docker run ubunut/ubunut:latest` - docker was killed immediately
 - `docker run ubunut/ubunut:latest  sleep 5` - sleep for 5 sec
 - `docker run -d  ubunut/ubunut:latest  sleep 50;docker ps` - you can check it is running backgroun as process is still running. else terminates.
+- `docker system prune -a` - will clear all the images dangling images - free up the space
 ```
 
 

@@ -202,76 +202,57 @@ CMD ["-g", "daemon off;"]
 - Docker compose links two pods using command line and docker compose file compare view :
   <img width="1508" alt="image" src="https://github.com/vurachaitanya/j2e_docker/assets/6918419/c0ceee5e-c353-4bee-973f-c7e9f5f5bbc3">
 - Sample code of compose : [GH: example-voting-app/docker-compose.yml at main · dockersamples/example-voting-app](https://github.com/dockersamples/example-voting-app/blob/main/docker-compose.yml)
+- Sample code for wordpress : [GH: awesome-compose/official-documentation-samples/wordpress/README.md at m...ompose · GitHub](https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/wordpress/README.md)
 
 - Sample code :
-- vi Dockercompose  
+- vi docker-compose.yml 
 ```
-version: '3.9'
 services:
   db:
-    image: postgres:13
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: voting_db
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
+  wordpress:
+    image: wordpress:latest
     volumes:
-      - db_data:/var/lib/postgresql/data
-
-  web:
-    build: ./web-app
-    restart: always
+      - wp_data:/var/www/html
     ports:
-      - 8080:8080
-    volumes:
-      - app_code:/app
-    depends_on:
-      - db
-
+      - 80:80
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
 volumes:
   db_data:
-  app_code:
+  wp_data:
+```
+ - `docker compose up -d` - build the docker compose from current dir
+
 
 ```
-- mkdir web-app;cd web-app
-- vi app.py
-```
-from flask import Flask
 
-app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Welcome to the Voting App!"
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+
+
 
 ```
-- vi requirments.txt
-```
-flask==2.0.1
-requests==2.26.0
-numpy==1.21.1
 
-```  
-- vi Dockerfile
-```
-FROM python:3.9
-
-WORKDIR /app
-
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python", "app.py"]
-
-```
-- `docker-compose -f Dockercompose up`
-- 
 
 ## CGroups & Namespaces
 - Namespaces :

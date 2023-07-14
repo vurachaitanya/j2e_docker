@@ -284,5 +284,102 @@ CMD ["python", "app.py"]
   - `docker run --memory=100m ubuntu`
 
   
+```
 
 
+
+
+
+
+
+
+
+```
+
+#### Start two containers and add them to the same network using the “docker run —network” command.
+- `docker network create mynetwork` - create network
+- `docker run --network=mynetwork --name container1 <image1>` - Create container with network
+- `docker run --network=mynetwork --name container2 <image2>`
+- `docker exec -it image1 ping image2`
+
+
+
+```
+
+
+
+
+
+
+
+```
+
+#### Create a Dockerfile that uses a multi-stage build to compile and run a python application.
+- `docker run -d -p 5001:5000 multi_stage_containers`
+- `vi Dockerfile`
+```
+# Stage 1: Build stage
+FROM python:3.9 as builder
+
+WORKDIR /app
+
+# Copy the requirements file
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --user -r requirements.txt
+
+# Copy the source code
+COPY . .
+
+# Compile the application (if needed)
+RUN python setup.py build
+
+# Stage 2: Runtime stage
+FROM python:3.9
+
+WORKDIR /app
+
+# Copy the compiled application from the builder stage
+COPY --from=builder /app .
+
+# Install runtime dependencies
+RUN pip install --user -r requirements.txt
+
+# Set the entry point
+CMD ["python", "app.py"]
+```
+- vi app.py
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+  ```
+- vi requirments.txt
+  ```
+  Flask==2.0.1
+  ```
+- vi setup.py
+```
+from setuptools import setup
+
+setup(
+    name='myapp',
+    version='1.0',
+    packages=[''],
+    url='',
+    license='',
+    author='',
+    author_email='',
+    description='My Python application'
+)
+
+
+```

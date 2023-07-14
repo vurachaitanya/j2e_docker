@@ -1,9 +1,9 @@
 # j2e_docker
 
-docker pull nginx:1.25 
-docker pull nginx:1.25.1-alpine
-docker pull jenkins
-docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
+- docker pull nginx:1.25 
+- docker pull nginx:1.25.1-alpine
+- docker pull jenkins/jenkins
+- docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 
 ## History of Docker :
 - build in 1970
